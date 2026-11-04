@@ -1,0 +1,37 @@
+{
+  "name": "raeen",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:client": "vite --host 127.0.0.1",
+    "dev:node": "cargo run -p raeen-node",
+    "build": "tsc --noEmit && vite build",
+    "start": "cargo run --release -p raeen-node",
+    "check": "tsc --noEmit",
+    "test": "cargo build -p raeen-node && node --test tests/protocol.test.mjs",
+    "test:ui": "cargo build -p raeen-node && playwright test",
+    "desktop": "tauri dev",
+    "desktop:build": "tauri build"
+  },
+  "dependencies": {
+    "@fontsource-variable/dm-sans": "^5.3.0",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@tanstack/react-virtual": "^3.13.12",
+    "livekit-client": "^2.23.0",
+    "lucide-react": "^1.68.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@tauri-apps/cli": "^2.12.4",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^6.2.1",
+    "prettier": "^3.9.10",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.5"
+  }
+}

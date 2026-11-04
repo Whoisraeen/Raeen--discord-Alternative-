@@ -1,0 +1,30 @@
+services:
+  raeen:
+    build: .
+    ports:
+      - "127.0.0.1:3001:3001"
+    volumes:
+      - raeen-data:/app/data
+    environment:
+      RAEEN_NAME: ${RAEEN_NAME:-The Commons}
+      RAEEN_ORIGINS: ${RAEEN_ORIGINS:-http://localhost:3001,http://127.0.0.1:3001,tauri://localhost,http://tauri.localhost,https://tauri.localhost}
+      RAEEN_OWNER_KEY: ${RAEEN_OWNER_KEY:-}
+      LIVEKIT_URL: ${LIVEKIT_URL:-}
+      LIVEKIT_API_KEY: ${LIVEKIT_API_KEY:-}
+      LIVEKIT_API_SECRET: ${LIVEKIT_API_SECRET:-}
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+  # Optional local development relay. Development credentials are not for public hosting.
+  livekit:
+    image: livekit/livekit-server:v1.13.10
+    profiles: [voice]
+    command: --dev --bind 0.0.0.0 --node-ip 127.0.0.1
+    ports:
+      - "127.0.0.1:7880:7880"
+      - "127.0.0.1:7881:7881"
+      - "127.0.0.1:7882:7882/udp"
+volumes:
+  raeen-data:
