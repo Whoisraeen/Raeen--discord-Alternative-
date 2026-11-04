@@ -17,15 +17,15 @@ const keys = () => {
   const pair = generateKeyPairSync('ed25519');
   return { ...pair, public_key: pair.publicKey.export({ format: 'jwk' }).x };
 };
-async function start() {
+async function start({ database = 'test.db', ownerKey = '', voice = true } = {}) {
   child = spawn(resolve('target/debug/raeen-node'), [], {
     env: {
       ...process.env,
       RAEEN_BIND: `127.0.0.1:${port}`,
-      RAEEN_DATABASE: join(directory, 'test.db'),
-      RAEEN_OWNER_KEY: '',
+      RAEEN_DATABASE: join(directory, database),
+      RAEEN_OWNER_KEY: ownerKey,
       RAEEN_ORIGINS: `http://127.0.0.1:${port},https://allowed.test`,
-      LIVEKIT_URL: 'ws://127.0.0.1:7880',
+      LIVEKIT_URL: voice ? 'ws://127.0.0.1:7880' : '',
       LIVEKIT_API_KEY: 'test-key',
       LIVEKIT_API_SECRET: 'test-secret-for-integration-only',
     },
@@ -89,11 +89,8 @@ async function login(pair, name) {
     },
   });
 }
-async function socket(token, origin) {
-  const ws = new WebSocket(
-    base.replace('http', 'ws') + '/ws',
-    origin ? { headers: { Origin: origin } } : undefined,
-  );
+async function socket(token) {
+  const ws = new WebSocket(base.replace('http', 'ws') + '/ws');
   const queue = [],
     waiters = [];
   ws.addEventListener('message', (event) => {
@@ -288,5 +285,22 @@ test('signed identities, live chat, permissions, search, and persistence work to
     assert.equal(messages[0].id, reply.id);
     const data = await request('/api/bootstrap', { token: owner.token });
     assert.ok(data.channels.some((c) => c.name === 'project-room'));
+  });
+  await t.test('reserved ownership survives an earlier guest registration', async () => {
+    const reserved = keys();
+    await stop();
+    await start({ database: 'reserved.db', ownerKey: reserved.public_key, voice: false });
+    const guest = await login(keys(), 'Early guest');
+    const designated = await login(reserved, 'Designated owner');
+    assert.equal(guest.user.role, 'member');
+    assert.equal(designated.user.role, 'owner');
+    await request('/api/voice/token', { token: guest.token, body: { channel_id: 'default-3' }, status: 503 });
+  });
+  await t.test('simultaneous first registrations produce exactly one owner', async () => {
+    await stop();
+    await start({ database: 'concurrent.db' });
+    const sessions = await Promise.all([login(keys(), 'First arrival'), login(keys(), 'Second arrival')]);
+    assert.equal(sessions.filter((session) => session.user.role === 'owner').length, 1);
+    assert.equal(sessions.filter((session) => session.user.role === 'member').length, 1);
   });
 });
