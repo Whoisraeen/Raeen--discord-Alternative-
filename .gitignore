@@ -1,11 +1,64 @@
+# JavaScript dependencies, builds, and caches
 node_modules/
 dist/
+.vite/
+.cache/
+*.tsbuildinfo
+
+# Rust build output (including src-tauri/target) and rustfmt backups
 target/
-data/
-.env
+*.rs.bk
+
+# Generated Tauri schemas; keep icons, capabilities, and native source projects
+/src-tauri/gen/schemas/
+
+# Local community data and SQLite sidecar files
+/data/
 *.db
-*.db-shm
-*.db-wal
-test-results/
-playwright-report/
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+
+# Local configuration and identity backups
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.template
+!.env.*.template
+raeen-identity*.json
+
+# Test reports, coverage, screenshots, and packaged applications
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/coverage/
+/.nyc_output/
+/artifacts/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local editor state; allow shared VS Code project configuration
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+.history/
+*.swp
+*.swo
+*~
+
+# Operating system metadata
 .DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# Keep package-lock.json and both Cargo.lock files under version control.

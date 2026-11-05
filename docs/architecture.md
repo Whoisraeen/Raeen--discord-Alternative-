@@ -37,6 +37,8 @@ The node signs a standard LiveKit HS256 access token after authenticating the ca
 
 The client requests a microphone only when joining. Remote audio is attached outside the channel view, so it continues while reading text channels. Screen tracks are attached in the active voice view. LiveKit owns media transport reconnection. Native noise suppression, push-to-talk, per-app capture, audio routing, and platform-specific loopback remain unimplemented.
 
+A local two-browser call was verified against LiveKit 1.13.11 using Chromium's synthetic microphone devices. Both clients decoded remote audio, and mute, deafen, disconnect, and audio continuity during text-channel navigation passed. This does not validate real hardware, WAN latency, native screen capture, or cross-platform behavior.
+
 ## Boundaries and limitations
 
 - HTTPS/WSS is required for remote connections. Loopback HTTP is allowed for local development. The node itself expects TLS termination at a reverse proxy.

@@ -97,6 +97,18 @@ docker compose --profile voice up --build
 
 Open http://localhost:3001. `--dev` LiveKit credentials are for local testing. Public hosting needs a real LiveKit deployment with TLS, appropriate UDP/TCP/TURN ports, and a browser-reachable advertised address. Screen capture, application audio, and codecs depend on the browser/OS; microphone permissions are requested when joining.
 
+For local development without Docker, install `livekit-server` (on macOS: `brew install livekit`) and run it in a separate terminal:
+
+```sh
+livekit-server --dev --bind 127.0.0.1 --node-ip 127.0.0.1
+```
+
+Then start Raeen with the development relay credentials:
+
+```sh
+LIVEKIT_URL=ws://127.0.0.1:7880 LIVEKIT_API_KEY=devkey LIVEKIT_API_SECRET=secret npm run dev
+```
+
 **Encryption:** this MVP provides transport encryption when deployed behind HTTPS/WSS and WebRTC’s normal transport protection. Text is plaintext in the node’s database. Voice does not enable LiveKit E2EE. The current search is **node-side FTS5**, not local-first encrypted search.
 
 ## Docker
@@ -117,11 +129,13 @@ npm test
 npx playwright install chromium
 npm run test:ui
 cargo check --manifest-path src-tauri/Cargo.toml
+# Optional, with a local LiveKit --dev relay running on port 7880:
+npm run test:voice
 ```
 
 Protocol integration tests run a real node against a temporary database and cover forged/replayed signatures, two-client live delivery, idempotency, permissions and role revocation, reply boundaries, FTS edit/delete consistency, token scoping, and restart persistence. Browser tests run the production client against another isolated temporary node and cover chat, replies, reactions, editing, channels, search, theme preferences, encrypted identity recovery, and mobile layout. Test data does not enter your development database.
 
-LiveKit token generation and the unconfigured voice UI are tested. A real media call and cross-platform native media capture still need verification with a running relay. RAM, CPU, throughput, and voice latency claims need benchmarks; this project does not assert the estimates in the original proposal.
+The optional voice test passed against LiveKit 1.13.11: two Chromium clients exchanged real WebRTC audio using synthetic microphone sources, muted/deafened, kept audio running while browsing text channels, and disconnected. LiveKit token generation and the unconfigured voice UI are also tested. Real hardware, screen sharing, and cross-platform native media capture still need verification. RAM, CPU, throughput, and voice latency claims need benchmarks; this project does not assert the estimates in the original proposal.
 
 ## Protocol and next steps
 

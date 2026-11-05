@@ -12,6 +12,7 @@
     "check": "tsc --noEmit",
     "test": "cargo build -p raeen-node && node --test tests/protocol.test.mjs",
     "test:ui": "cargo build -p raeen-node && playwright test",
+    "test:voice": "cargo build -p raeen-node && playwright test --config playwright.voice.config.ts",
     "desktop": "tauri dev",
     "desktop:build": "tauri build"
   },

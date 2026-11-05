@@ -12,9 +12,9 @@ const node = spawn(resolve('target/debug/raeen-node'), [], {
     RAEEN_DATABASE: join(directory, 'browser.db'),
     RAEEN_OWNER_KEY: '',
     RAEEN_ORIGINS: 'http://127.0.0.1:3011',
-    LIVEKIT_URL: '',
-    LIVEKIT_API_KEY: '',
-    LIVEKIT_API_SECRET: '',
+    LIVEKIT_URL: process.env.RAEEN_TEST_VOICE === '1' ? 'ws://127.0.0.1:7880' : '',
+    LIVEKIT_API_KEY: process.env.RAEEN_TEST_VOICE === '1' ? 'devkey' : '',
+    LIVEKIT_API_SECRET: process.env.RAEEN_TEST_VOICE === '1' ? 'secret' : '',
   },
 });
 let stopped = false;
