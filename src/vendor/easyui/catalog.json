@@ -1,0 +1,1087 @@
+{
+  "upstream": "https://github.com/Surajmaurya1/easyui",
+  "commit": "e1d3baf916c7e8fc19b25b9f82e6bdb3d5bafec5",
+  "catalog": "https://easyui.site/registry.json",
+  "items": [
+    {
+      "id": "activity-feed",
+      "title": "Activity Feed",
+      "source": "src/vendor/easyui/components/ui/ActivityFeed.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "activity-heatmap",
+      "title": "Activity Heatmap",
+      "source": "src/vendor/easyui/components/ui/ActivityHeatmap.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "advanced-data-table",
+      "title": "Advanced Data Table",
+      "source": "src/vendor/easyui/components/ui/AdvancedDataTable.tsx",
+      "screens": [
+        "People"
+      ]
+    },
+    {
+      "id": "ai-agent-activity",
+      "title": "AI Agent Activity",
+      "source": "src/vendor/easyui/components/ui/AIAgentActivity.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "ai-response",
+      "title": "AI Response",
+      "source": "src/vendor/easyui/components/ui/AIResponse.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "airport-matrix-clock",
+      "title": "Airport Matrix Clock",
+      "source": "src/vendor/easyui/components/ui/AirportMatrixClock.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "alert",
+      "title": "Alert",
+      "source": "src/vendor/easyui/components/ui/alert.tsx",
+      "screens": [
+        "Node",
+        "Budget",
+        "Guide"
+      ]
+    },
+    {
+      "id": "animated-file-upload",
+      "title": "Animated File Upload",
+      "source": "src/vendor/easyui/components/ui/AnimatedFileUpload.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "animated-number",
+      "title": "Animated Number Morph",
+      "source": "src/vendor/easyui/components/ui/AnimatedNumber.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "animated-tabs",
+      "title": "Animated Tabs",
+      "source": "src/vendor/easyui/components/ui/AnimatedTabs.tsx",
+      "screens": [
+        "Workspace"
+      ]
+    },
+    {
+      "id": "avatar-stack",
+      "title": "Avatar Stack",
+      "source": "src/vendor/easyui/components/ui/AvatarStack.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "badge",
+      "title": "Badge",
+      "source": "src/vendor/easyui/components/ui/badge.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "bar-chart",
+      "title": "Bar Chart",
+      "source": "src/vendor/easyui/components/ui/BarChart.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "batch-gesture-tray",
+      "title": "Batch Gesture Tray",
+      "source": "src/vendor/easyui/components/ui/BatchGestureTray.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "book-call-button",
+      "title": "Book Call Button",
+      "source": "src/vendor/easyui/components/ui/BookCallButton.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "branching-submenu",
+      "title": "Branching Submenu",
+      "source": "src/vendor/easyui/components/ui/BranchingSubmenu.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "breadcrumb",
+      "title": "Breadcrumb",
+      "source": "src/vendor/easyui/components/ui/breadcrumb.tsx",
+      "screens": [
+        "Workspace"
+      ]
+    },
+    {
+      "id": "button",
+      "title": "Button",
+      "source": "src/vendor/easyui/components/ui/Button.tsx",
+      "screens": [
+        "Workspace",
+        "Home",
+        "People",
+        "Planner",
+        "Budget",
+        "Appearance",
+        "Guide"
+      ]
+    },
+    {
+      "id": "calendar",
+      "title": "Calendar",
+      "source": "src/vendor/easyui/components/ui/calendar.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "car-smoke-page-transition",
+      "title": "Car Smoke Page Transition",
+      "source": "src/vendor/easyui/components/ui/CarSmokePageTransition.tsx",
+      "screens": [
+        "Appearance"
+      ]
+    },
+    {
+      "id": "chat",
+      "title": "Chat",
+      "source": "src/vendor/easyui/components/ui/Chat.tsx",
+      "screens": [
+        "App \u00b7 text channels"
+      ]
+    },
+    {
+      "id": "circular-orbit",
+      "title": "Circular Orbit",
+      "source": "src/vendor/easyui/components/ui/CircularOrbit.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "code-snippet-deck",
+      "title": "Code Snippet Deck",
+      "source": "src/vendor/easyui/components/ui/CodeSnippetDeck.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "combobox",
+      "title": "Combobox",
+      "source": "src/vendor/easyui/components/ui/combobox.tsx",
+      "screens": [
+        "People"
+      ]
+    },
+    {
+      "id": "command-menu",
+      "title": "Command Menu",
+      "source": "src/vendor/easyui/components/ui/CommandMenu.tsx",
+      "screens": [
+        "Workspace"
+      ]
+    },
+    {
+      "id": "cursor-follower",
+      "title": "Cursor Follower",
+      "source": "src/vendor/easyui/components/ui/CursorFollower.tsx",
+      "screens": [
+        "Home",
+        "Appearance"
+      ]
+    },
+    {
+      "id": "date-picker",
+      "title": "Date Picker",
+      "source": "src/vendor/easyui/components/ui/date-picker.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "density-lens",
+      "title": "Density Lens",
+      "source": "src/vendor/easyui/components/ui/DensityLens.tsx",
+      "screens": [
+        "People"
+      ]
+    },
+    {
+      "id": "dependency-trace",
+      "title": "Dependency Trace",
+      "source": "src/vendor/easyui/components/ui/DependencyTrace.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "depth-corridor",
+      "title": "Depth Corridor",
+      "source": "src/vendor/easyui/components/ui/DepthCorridor.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "directional-tooltip",
+      "title": "DirectionalTooltip",
+      "source": "src/vendor/easyui/components/ui/DirectionalTooltip.tsx",
+      "screens": [
+        "Workspace"
+      ]
+    },
+    {
+      "id": "donut-chart",
+      "title": "Donut Chart",
+      "source": "src/vendor/easyui/components/ui/DonutChart.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "dot-field",
+      "title": "Dot Field",
+      "source": "src/vendor/easyui/components/ui/DotField.tsx",
+      "screens": [
+        "Home",
+        "Appearance"
+      ]
+    },
+    {
+      "id": "dot-shader",
+      "title": "Dot Shader",
+      "source": "src/vendor/easyui/components/ui/DotShader.tsx",
+      "screens": [
+        "Home",
+        "Appearance"
+      ]
+    },
+    {
+      "id": "drag-to-confirm",
+      "title": "Drag to Confirm",
+      "source": "src/vendor/easyui/components/ui/DragToConfirm.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "draw-checkbox",
+      "title": "DrawCheckbox",
+      "source": "src/vendor/easyui/components/ui/DrawCheckbox.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "dynamic-island",
+      "title": "Dynamic Island",
+      "source": "src/vendor/easyui/components/ui/DynamicIsland.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "earnings",
+      "title": "Earnings",
+      "source": "src/vendor/easyui/components/ui/Earnings.tsx",
+      "screens": [
+        "Budget"
+      ]
+    },
+    {
+      "id": "evil-eye",
+      "title": "Evil Eye",
+      "source": "src/vendor/easyui/components/ui/EvilEye.tsx",
+      "screens": [
+        "Home",
+        "Appearance"
+      ]
+    },
+    {
+      "id": "expandable-data-row",
+      "title": "Expandable Data Row",
+      "source": "src/vendor/easyui/components/ui/ExpandableDataRow.tsx",
+      "screens": [
+        "People"
+      ]
+    },
+    {
+      "id": "expandable-search",
+      "title": "Expandable Search",
+      "source": "src/vendor/easyui/components/ui/ExpandableSearch.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "faq",
+      "title": "FAQ",
+      "source": "src/vendor/easyui/components/ui/FAQ.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "floating-action-dock",
+      "title": "Floating Action Dock",
+      "source": "src/vendor/easyui/components/ui/FloatingActionDock.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "focus-mode",
+      "title": "Focus Mode",
+      "source": "src/vendor/easyui/components/ui/FocusMode.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "form",
+      "title": "Form",
+      "source": "src/vendor/easyui/components/ui/Form.tsx",
+      "screens": [
+        "Planner",
+        "Budget",
+        "Guide"
+      ]
+    },
+    {
+      "id": "funnel-chart",
+      "title": "Funnel Chart",
+      "source": "src/vendor/easyui/components/ui/FunnelChart.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "glass-navbar",
+      "title": "Glass Navbar",
+      "source": "src/vendor/easyui/components/ui/GlassNavbar.tsx",
+      "screens": [
+        "Workspace"
+      ]
+    },
+    {
+      "id": "glitch-text",
+      "title": "Glitch Text",
+      "source": "src/vendor/easyui/components/ui/GlitchText.tsx",
+      "screens": [
+        "Appearance"
+      ]
+    },
+    {
+      "id": "glyph-matrix",
+      "title": "Glyph Matrix",
+      "source": "src/vendor/easyui/components/ui/GlyphMatrix.tsx",
+      "screens": [
+        "Home",
+        "Appearance"
+      ]
+    },
+    {
+      "id": "gooey-menu",
+      "title": "Gooey Menu",
+      "source": "src/vendor/easyui/components/ui/GooeyMenu.tsx",
+      "screens": [
+        "Appearance"
+      ]
+    },
+    {
+      "id": "gravity-particle-burst",
+      "title": "Gravity Particle Burst",
+      "source": "src/vendor/easyui/components/ui/GravityParticleBurst.tsx",
+      "screens": [
+        "Appearance"
+      ]
+    },
+    {
+      "id": "hamburger-menu",
+      "title": "Hamburger Menu",
+      "source": "src/vendor/easyui/components/ui/HamburgerMenu.tsx",
+      "screens": [
+        "Workspace"
+      ]
+    },
+    {
+      "id": "interactive-area-chart",
+      "title": "Interactive Area Chart",
+      "source": "src/vendor/easyui/components/ui/InteractiveAreaChart.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "interactive-timeline",
+      "title": "Interactive Timeline",
+      "source": "src/vendor/easyui/components/ui/InteractiveTimeline.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "intro-loader",
+      "title": "Intro Loader",
+      "source": "src/vendor/easyui/components/ui/IntroLoader.tsx",
+      "screens": [
+        "Appearance"
+      ]
+    },
+    {
+      "id": "ios-search-bar",
+      "title": "iOS-style Search Bar",
+      "source": "src/vendor/easyui/components/ui/IOSSearchBar.tsx",
+      "screens": [
+        "People"
+      ]
+    },
+    {
+      "id": "liquid-ripple-button",
+      "title": "Liquid Ripple Button",
+      "source": "src/vendor/easyui/components/ui/LiquidRippleButton.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "liquid-toggle",
+      "title": "Liquid Toggle",
+      "source": "src/vendor/easyui/components/ui/LiquidToggle.tsx",
+      "screens": [
+        "Appearance"
+      ]
+    },
+    {
+      "id": "live-line-chart",
+      "title": "Live Line Chart",
+      "source": "src/vendor/easyui/components/ui/LiveLineChart.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "loader",
+      "title": "Loader",
+      "source": "src/vendor/easyui/components/ui/Loader.tsx",
+      "screens": [
+        "Workspace"
+      ]
+    },
+    {
+      "id": "lock-input",
+      "title": "LockInput",
+      "source": "src/vendor/easyui/components/ui/LockInput.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "login",
+      "title": "Login",
+      "source": "src/vendor/easyui/components/ui/Login.tsx",
+      "screens": [
+        "App \u00b7 returning/imported identities"
+      ]
+    },
+    {
+      "id": "mac-os-folder-cards",
+      "title": "macOS Folder Cards",
+      "source": "src/vendor/easyui/components/ui/MacOSFolderCards.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "magnetic-button",
+      "title": "Magnetic Button",
+      "source": "src/vendor/easyui/components/ui/MagneticButton.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "meteors",
+      "title": "Meteors",
+      "source": "src/vendor/easyui/components/ui/Meteors.tsx",
+      "screens": [
+        "Home",
+        "Appearance"
+      ]
+    },
+    {
+      "id": "metric-hud",
+      "title": "Metric HUD",
+      "source": "src/vendor/easyui/components/ui/MetricHUD.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "money-card",
+      "title": "Money Card",
+      "source": "src/vendor/easyui/components/ui/MoneyCard.tsx",
+      "screens": [
+        "Budget"
+      ]
+    },
+    {
+      "id": "morphing-blob",
+      "title": "Morphing Blob",
+      "source": "src/vendor/easyui/components/ui/MorphingBlob.tsx",
+      "screens": [
+        "Home",
+        "Appearance"
+      ]
+    },
+    {
+      "id": "morphing-button",
+      "title": "Morphing Button",
+      "source": "src/vendor/easyui/components/ui/MorphingButton.tsx",
+      "screens": [
+        "Planner",
+        "Appearance"
+      ]
+    },
+    {
+      "id": "morphing-dialog",
+      "title": "Morphing Dialog",
+      "source": "src/vendor/easyui/components/ui/MorphingDialog.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "morphing-icon",
+      "title": "Morphing Icon",
+      "source": "src/vendor/easyui/components/ui/MorphingIcon.tsx",
+      "screens": [
+        "People"
+      ]
+    },
+    {
+      "id": "morphing-mega-menu",
+      "title": "Morphing Mega Menu",
+      "source": "src/vendor/easyui/components/ui/MorphingMegaMenu.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "morphing-shape-loader",
+      "title": "Morphing Shape Loader",
+      "source": "src/vendor/easyui/components/ui/MorphingShapeLoader.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "neon-edge-button",
+      "title": "Neon Edge Button",
+      "source": "src/vendor/easyui/components/ui/NeonEdgeButton.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "nimbu-mirchi",
+      "title": "Nimbu Mirchi",
+      "source": "src/vendor/easyui/components/ui/NimbuMirchi.tsx",
+      "screens": [
+        "Home",
+        "Appearance"
+      ]
+    },
+    {
+      "id": "not-found",
+      "title": "Not Found",
+      "source": "src/vendor/easyui/components/ui/NotFound.tsx",
+      "screens": [
+        "People"
+      ]
+    },
+    {
+      "id": "notification-bell",
+      "title": "Notification Bell",
+      "source": "src/vendor/easyui/components/ui/NotificationBell.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "notification-stack",
+      "title": "Notification Stack",
+      "source": "src/vendor/easyui/components/ui/NotificationStack.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "orbital-loading-ring",
+      "title": "Orbital Loading Ring",
+      "source": "src/vendor/easyui/components/ui/OrbitalLoadingRing.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "origin-dropdown",
+      "title": "OriginDropdown",
+      "source": "src/vendor/easyui/components/ui/OriginDropdown.tsx",
+      "screens": [
+        "People"
+      ]
+    },
+    {
+      "id": "otp-input",
+      "title": "OTP Input",
+      "source": "src/vendor/easyui/components/ui/OtpInput.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "package-box",
+      "title": "Package Box",
+      "source": "src/vendor/easyui/components/ui/PackageBox.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "particle-delete",
+      "title": "Particle Delete",
+      "source": "src/vendor/easyui/components/ui/ParticleDelete.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "payment-receipt-printer",
+      "title": "Payment Receipt Printer",
+      "source": "src/vendor/easyui/components/ui/PaymentReceiptPrinter.tsx",
+      "screens": [
+        "Budget"
+      ]
+    },
+    {
+      "id": "payment-status",
+      "title": "Payment Status",
+      "source": "src/vendor/easyui/components/ui/PaymentStatus.tsx",
+      "screens": [
+        "Budget"
+      ]
+    },
+    {
+      "id": "peek-card",
+      "title": "Peek Card",
+      "source": "src/vendor/easyui/components/ui/PeekCard.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "photo-box",
+      "title": "Photo Box",
+      "source": "src/vendor/easyui/components/ui/PhotoBox.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "pill-navigation",
+      "title": "Pill Navigation",
+      "source": "src/vendor/easyui/components/ui/PillNavigation.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "press-button",
+      "title": "PressButton",
+      "source": "src/vendor/easyui/components/ui/PressButton.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "pricing",
+      "title": "Pricing",
+      "source": "src/vendor/easyui/components/ui/Pricing.tsx",
+      "screens": [
+        "Budget"
+      ]
+    },
+    {
+      "id": "product-tour",
+      "title": "Product Tour",
+      "source": "src/vendor/easyui/components/ui/ProductTour.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "profile-card",
+      "title": "Profile Card",
+      "source": "src/vendor/easyui/components/ui/ProfileCard.tsx",
+      "screens": [
+        "People"
+      ]
+    },
+    {
+      "id": "pull-to-refresh",
+      "title": "Pull to Refresh",
+      "source": "src/vendor/easyui/components/ui/PullToRefresh.tsx",
+      "screens": [
+        "Node"
+      ]
+    },
+    {
+      "id": "rainbow-button",
+      "title": "Rainbow Button",
+      "source": "src/vendor/easyui/components/ui/RainbowButton.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "recovery-ledger",
+      "title": "Recovery Ledger",
+      "source": "src/vendor/easyui/components/ui/RecoveryLedger.tsx",
+      "screens": [
+        "Appearance"
+      ]
+    },
+    {
+      "id": "reveal-card",
+      "title": "Reveal Card",
+      "source": "src/vendor/easyui/components/ui/RevealCard.tsx",
+      "screens": [
+        "People"
+      ]
+    },
+    {
+      "id": "rocket-party-popper",
+      "title": "Rocket Party Popper",
+      "source": "src/vendor/easyui/components/ui/RocketPartyPopper.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "scroll-progress-nav",
+      "title": "Scroll Progress Navigation",
+      "source": "src/vendor/easyui/components/ui/ScrollProgressNav.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "scrollvelocitytext",
+      "title": "Scroll Velocity Text",
+      "source": "src/vendor/easyui/components/ui/Scrollvelocitytext.tsx",
+      "screens": [
+        "Appearance"
+      ]
+    },
+    {
+      "id": "selection-basket",
+      "title": "Selection Basket",
+      "source": "src/vendor/easyui/components/ui/SelectionBasket.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "settle-modal",
+      "title": "SettleModal",
+      "source": "src/vendor/easyui/components/ui/SettleModal.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "sheet",
+      "title": "Sheet",
+      "source": "src/vendor/easyui/components/ui/sheet.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "shooting-stars",
+      "title": "Shooting Stars",
+      "source": "src/vendor/easyui/components/ui/ShootingStars.tsx",
+      "screens": [
+        "Home",
+        "Appearance"
+      ]
+    },
+    {
+      "id": "sidebar",
+      "title": "Sidebar",
+      "source": "src/vendor/easyui/components/ui/sidebar.tsx",
+      "screens": [
+        "Workspace"
+      ]
+    },
+    {
+      "id": "sign-up",
+      "title": "Sign Up",
+      "source": "src/vendor/easyui/components/ui/SignUp.tsx",
+      "screens": [
+        "App \u00b7 identity creation"
+      ]
+    },
+    {
+      "id": "skeleton",
+      "title": "Skeleton",
+      "source": "src/vendor/easyui/components/ui/skeleton.tsx",
+      "screens": [
+        "Workspace"
+      ]
+    },
+    {
+      "id": "slide-pagination",
+      "title": "SlidePagination",
+      "source": "src/vendor/easyui/components/ui/SlidePagination.tsx",
+      "screens": [
+        "People"
+      ]
+    },
+    {
+      "id": "small-floating-dock",
+      "title": "Small Floating Dock",
+      "source": "src/vendor/easyui/components/ui/SmallFloatingDock.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "smart-comparison",
+      "title": "Smart Comparison",
+      "source": "src/vendor/easyui/components/ui/SmartComparison.tsx",
+      "screens": [
+        "Budget"
+      ]
+    },
+    {
+      "id": "smooth-accordion",
+      "title": "Smooth Accordion",
+      "source": "src/vendor/easyui/components/ui/SmoothAccordion.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "sparkles-core",
+      "title": "Sparkles Core",
+      "source": "src/vendor/easyui/components/ui/SparklesCore.tsx",
+      "screens": [
+        "Home",
+        "Appearance"
+      ]
+    },
+    {
+      "id": "speed-warp",
+      "title": "Speed Warp",
+      "source": "src/vendor/easyui/components/ui/SpeedWarp.tsx",
+      "screens": [
+        "Home",
+        "Appearance"
+      ]
+    },
+    {
+      "id": "split-button",
+      "title": "Split Button",
+      "source": "src/vendor/easyui/components/ui/SplitButton.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "spotlight-card",
+      "title": "Spotlight Card",
+      "source": "src/vendor/easyui/components/ui/SpotlightCard.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "spotlight-search",
+      "title": "Spotlight Search",
+      "source": "src/vendor/easyui/components/ui/SpotlightSearch.tsx",
+      "screens": [
+        "Workspace"
+      ]
+    },
+    {
+      "id": "spring-select",
+      "title": "SpringSelect",
+      "source": "src/vendor/easyui/components/ui/SpringSelect.tsx",
+      "screens": [
+        "Planner",
+        "Budget"
+      ]
+    },
+    {
+      "id": "stack-unfold-panel",
+      "title": "Stack Unfold Panel",
+      "source": "src/vendor/easyui/components/ui/StackUnfoldPanel.tsx",
+      "screens": [
+        "People"
+      ]
+    },
+    {
+      "id": "stacked-cards",
+      "title": "Stacked Cards",
+      "source": "src/vendor/easyui/components/ui/StackedCards.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "stat-card",
+      "title": "Stat Card",
+      "source": "src/vendor/easyui/components/ui/StatCard.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "stepper",
+      "title": "Stepper",
+      "source": "src/vendor/easyui/components/ui/stepper.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "sticky-pages",
+      "title": "Sticky Pages",
+      "source": "src/vendor/easyui/components/ui/StickyPages.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "story-card",
+      "title": "Story Cards",
+      "source": "src/vendor/easyui/components/ui/StoryCard.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "stretch-switch",
+      "title": "StretchSwitch",
+      "source": "src/vendor/easyui/components/ui/StretchSwitch.tsx",
+      "screens": [
+        "Planner",
+        "Appearance"
+      ]
+    },
+    {
+      "id": "text-scramble-decoder",
+      "title": "Text Scramble Decoder",
+      "source": "src/vendor/easyui/components/ui/TextScrambleDecoder.tsx",
+      "screens": [
+        "Appearance"
+      ]
+    },
+    {
+      "id": "thinking-orb",
+      "title": "Thinking Orb",
+      "source": "src/vendor/easyui/components/ui/ThinkingOrb.tsx",
+      "screens": [
+        "Guide"
+      ]
+    },
+    {
+      "id": "torque-dial",
+      "title": "Torque Dial",
+      "source": "src/vendor/easyui/components/ui/TorqueDial.tsx",
+      "screens": [
+        "Appearance"
+      ]
+    },
+    {
+      "id": "typewriter-button",
+      "title": "Typewriter Button",
+      "source": "src/vendor/easyui/components/ui/TypewriterButton.tsx",
+      "screens": [
+        "Appearance"
+      ]
+    },
+    {
+      "id": "undo-toast",
+      "title": "Undo Toast",
+      "source": "src/vendor/easyui/components/ui/UndoToast.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "unfold-accordion",
+      "title": "UnfoldAccordion",
+      "source": "src/vendor/easyui/components/ui/UnfoldAccordion.tsx",
+      "screens": [
+        "Home"
+      ]
+    },
+    {
+      "id": "velocity-toast",
+      "title": "VelocityToast",
+      "source": "src/vendor/easyui/components/ui/VelocityToast.tsx",
+      "screens": [
+        "Planner"
+      ]
+    },
+    {
+      "id": "wallet-balance",
+      "title": "Wallet Balance",
+      "source": "src/vendor/easyui/components/ui/WalletBalance.tsx",
+      "screens": [
+        "Budget"
+      ]
+    },
+    {
+      "id": "wallet-card",
+      "title": "Wallet Card",
+      "source": "src/vendor/easyui/components/ui/WalletCard.tsx",
+      "screens": [
+        "Budget"
+      ]
+    }
+  ]
+}

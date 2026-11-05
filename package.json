@@ -9,29 +9,35 @@
     "dev:node": "cargo run -p raeen-node",
     "build": "tsc --noEmit && vite build",
     "start": "cargo run --release -p raeen-node",
-    "check": "tsc --noEmit",
+    "check": "tsc --noEmit && npm run check:components",
     "test": "cargo build -p raeen-node && node --test tests/protocol.test.mjs",
     "test:ui": "cargo build -p raeen-node && playwright test",
     "test:voice": "cargo build -p raeen-node && playwright test --config playwright.voice.config.ts",
     "desktop": "tauri dev",
-    "desktop:build": "tauri build"
+    "desktop:build": "tauri build",
+    "check:components": "node scripts/check-easyui.mjs"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.3.0",
     "@fontsource-variable/manrope": "^5.3.0",
     "@tanstack/react-virtual": "^3.13.12",
+    "clsx": "^2.1.1",
+    "framer-motion": "^14.9.1",
     "livekit-client": "^2.23.0",
     "lucide-react": "^1.68.0",
     "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "react-dom": "^19.3.1",
+    "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1",
+    "@tailwindcss/vite": "^4.3.4",
     "@tauri-apps/cli": "^2.12.4",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.2.1",
     "prettier": "^3.9.10",
+    "tailwindcss": "^4.3.4",
     "typescript": "^5.9.3",
     "vite": "^8.3.5"
   }

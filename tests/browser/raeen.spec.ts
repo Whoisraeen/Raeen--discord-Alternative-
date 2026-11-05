@@ -130,6 +130,7 @@ test('mobile navigation and voice setup state remain usable without overflow', a
     viewport: { width: 390, height: 844 },
     isMobile: true,
     hasTouch: true,
+    reducedMotion: 'reduce',
   });
   const page = await context.newPage();
   await page.goto('/');
@@ -138,11 +139,108 @@ test('mobile navigation and voice setup state remain usable without overflow', a
   await expect(page.getByRole('textbox', { name: 'Message #general', exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({ path: 'artifacts/raeen-mobile.png', fullPage: true });
+  await page.getByRole('button', { name: 'Open community canvas', exact: true }).click();
+  await expect(page.getByRole('group', { name: 'Draggable channel gallery' })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({ path: 'artifacts/raeen-canvas-mobile.png', fullPage: true });
+  await page
+    .getByRole('navigation', { name: 'Canvas channels' })
+    .getByRole('button', { name: 'Preview #general', exact: true })
+    .click();
+  await expect(
+    page.getByRole('dialog').getByText('A little bit of everything. Make yourself at home.', { exact: true }),
+  ).toBeVisible();
+  await page.getByRole('button', { name: 'Open channel', exact: true }).click();
+  await expect(page.getByRole('textbox', { name: 'Message #general', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Show channels', exact: true }).click();
   await page.getByRole('button', { name: 'The Lounge', exact: true }).click();
   await expect(page.getByRole('button', { name: 'View node setup', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'View node setup', exact: true }).click();
   await page.getByRole('button', { name: 'Community node', exact: true }).click();
   await expect(page.getByText('Awaiting setup', { exact: true })).toBeVisible();
+  await context.close();
+});
+
+test('the Phantom canvas opens real channels, supports dragging, and preserves chat drafts', async ({
+  browser,
+}) => {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  const errors: string[] = [],
+    foreignRequests: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  page.on('request', (request) => {
+    if (!request.url().startsWith('http://127.0.0.1:3011/') && !request.url().startsWith('data:'))
+      foreignRequests.push(request.url());
+  });
+  await join(page, 'Canvas Explorer');
+  await page
+    .getByRole('textbox', { name: 'Message #general', exact: true })
+    .fill('A thought to come back to.');
+  await page.getByRole('button', { name: 'Open community canvas', exact: true }).click();
+  const gallery = page.getByRole('group', { name: 'Draggable channel gallery' });
+  await expect(gallery).toBeVisible();
+  await expect(page.locator('.phantom-cell').first()).toBeAttached();
+  expect(await page.locator('.phantom-cell').count()).toBeLessThan(120);
+  const brokenImages = await page.locator('.phantom-cell img').evaluateAll(async (images) => {
+    await Promise.all(images.map((image) => (image as HTMLImageElement).decode()));
+    return images.filter((image) => !(image as HTMLImageElement).naturalWidth).length;
+  });
+  expect(brokenImages).toBe(0);
+  await page.screenshot({ path: 'artifacts/raeen-canvas-desktop.png', fullPage: true });
+  const rect = await gallery.boundingBox();
+  if (!rect) throw new Error('Gallery has no viewport');
+  const before = await page.locator('.phantom-cell').first().getAttribute('style');
+  await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(rect.x + rect.width / 2 + 140, rect.y + rect.height / 2 + 60, { steps: 12 });
+  await page.mouse.up();
+  expect(await page.locator('.phantom-cell').first().getAttribute('style')).not.toBe(before);
+  expect(await page.locator('.phantom-cell').count()).toBeLessThan(120);
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Recenter canvas', exact: true }).click();
+  const tile = await page.locator('.phantom-cell').evaluateAll((cells) => {
+    return cells
+      .map((cell) => {
+        const box = cell.getBoundingClientRect();
+        const x = box.left + box.width / 2,
+          y = box.top + box.height / 2;
+        return {
+          x,
+          y,
+          title: cell.getAttribute('aria-label')?.replace('Preview ', ''),
+          clickable: cell.contains(document.elementFromPoint(x, y)),
+        };
+      })
+      .find((cell) => cell.clickable && cell.y > 350 && cell.y < 650);
+  });
+  if (!tile) throw new Error('No visible gallery card');
+  await page.mouse.click(tile.x, tile.y);
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await expect(
+    page.getByRole('dialog').getByRole('heading', { name: tile.title, exact: true }),
+  ).toBeVisible();
+  await page.keyboard.press('ControlOrMeta+k');
+  await expect(page.getByRole('dialog')).toHaveCount(1);
+  await expect(
+    page.getByRole('dialog').getByRole('heading', { name: tile.title, exact: true }),
+  ).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  const navigation = page.getByRole('navigation', { name: 'Canvas channels' });
+  await navigation.getByRole('button', { name: 'Preview #general', exact: true }).focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.getByRole('button', { name: 'Open channel', exact: true }).click();
+  await expect(page.getByRole('textbox', { name: 'Message #general', exact: true })).toHaveValue(
+    'A thought to come back to.',
+  );
+  await expect(page.locator('.phantom-stage')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Open community canvas', exact: true }).click();
+  await navigation.getByRole('button', { name: 'Preview The Lounge', exact: true }).click();
+  await page.getByRole('button', { name: 'Open channel', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'View node setup', exact: true })).toBeVisible();
+  expect(errors).toEqual([]);
+  expect(foreignRequests).toEqual([]);
   await context.close();
 });

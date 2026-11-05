@@ -1,0 +1,54 @@
+@layer theme, base, raeen, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import './styles.css' layer(raeen);
+@import 'tailwindcss/utilities.css' layer(utilities);
+@source './vendor/easyui';
+@custom-variant dark (&:is(.dark *));
+@theme inline {
+  --color-background: var(--bg);
+  --color-surface: var(--panel);
+  --color-surface-hover: #2b322d;
+  --color-surface-raised: #242a26;
+  --color-border: var(--border);
+  --color-border-hover: #48574c;
+  --color-border-subtle: #252c27;
+  --color-text-primary: #e5eee7;
+  --color-text-secondary: #b3c2b7;
+  --color-text-muted: #8c9d91;
+  --color-text-subtle: #74857a;
+  --color-accent: var(--accent);
+  --color-accent-subtle: #b5f0c815;
+  --color-accent-glow: #b5f0c825;
+  --color-accent-blue: #b5f0c8;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-heading: 'Manrope', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-style: solid;
+    border-width: 0;
+  }
+  :root {
+    color-scheme: dark;
+    --surface: #202721;
+    --surface-hover: #2b322d;
+    --surface-raised: #242a26;
+    --border-hover: #48574c;
+    --border-subtle: #252c27;
+    --text-primary: #e5eee7;
+    --text-secondary: #b3c2b7;
+    --text-muted: #8c9d91;
+    --text-subtle: #74857a;
+    --accent-subtle: #b5f0c815;
+    --accent-glow: #b5f0c825;
+    --accent-ring: #b5f0c840;
+    --indicator-active: #b5f0c8;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+  }
+}

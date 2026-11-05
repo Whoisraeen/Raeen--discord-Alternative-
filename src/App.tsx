@@ -1,8 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import {
   Activity,
   ArrowRight,
-  BookOpen,
   Check,
   ChevronDown,
   ChevronRight,
@@ -12,6 +11,7 @@ import {
   Globe2,
   Hash,
   KeyRound,
+  LayoutGrid,
   LogOut,
   Menu,
   Mic,
@@ -35,7 +35,13 @@ import { NodeClient, defaultNode, normalizeNode } from './api';
 import { createIdentity, exportIdentity, importIdentity, loadIdentity, saveIdentity } from './identity';
 import { Avatar, ChatHistory, Composer, CopyButton, Logo, MessageText, Modal } from './components';
 import { useVoice, VoiceView } from './voice';
+import { Chat } from './vendor/easyui/components/ui/Chat';
+import { Login } from './vendor/easyui/components/ui/Login';
+import { SignUp } from './vendor/easyui/components/ui/SignUp';
 import type { Bootstrap, Channel, Identity, Message, NodeEvent } from './types';
+
+const CommunityWorkspace = lazy(() => import('./features/workspace/Workspace'));
+const CommunityCanvas = lazy(() => import('./CommunityCanvas'));
 
 type Dialog = 'none' | 'node' | 'settings' | 'create-channel' | 'search' | 'invite' | 'about';
 type SavedNode = { url: string; name: string };
@@ -75,6 +81,8 @@ export default function App() {
     [loading, setLoading] = useState<Record<string, boolean>>({}),
     [unread, setUnread] = useState<Record<string, number>>({});
   const [dialog, setDialog] = useState<Dialog>('none'),
+    [canvasOpen, setCanvasOpen] = useState(false),
+    [workspaceOpen, setWorkspaceOpen] = useState(false),
     [error, setError] = useState(''),
     [toast, setToast] = useState(''),
     [reply, setReply] = useState<Message | null>(null),
@@ -152,6 +160,8 @@ export default function App() {
         return updated;
       });
       setDialog('none');
+      setCanvasOpen(false);
+      setWorkspaceOpen(false);
       setConnection('connecting');
     } catch (error) {
       if (generation === connectGeneration.current) setError(errorMessage(error));
@@ -357,7 +367,7 @@ export default function App() {
     const onKey = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k' && boot) {
         event.preventDefault();
-        setDialog('search');
+        if (!document.querySelector('[role="dialog"][aria-modal="true"]')) setDialog('search');
       }
     };
     document.addEventListener('keydown', onKey);
@@ -418,7 +428,17 @@ export default function App() {
   const onReact = (message: Message, emoji: string) => {
     void mutate(`/api/messages/${message.id}/reactions`, 'POST', { emoji });
   };
-  const selectChannel = (next: Channel) => setActive(next.id);
+  const selectChannel = (next: Channel) => {
+    setActive(next.id);
+    setCanvasOpen(false);
+    setWorkspaceOpen(false);
+    setSidebarOpen(false);
+  };
+  const openCanvas = () => {
+    setWorkspaceOpen(false);
+    setCanvasOpen(true);
+    setSidebarOpen(false);
+  };
   const canManage = boot?.user.role !== 'member';
   const switchNode = async (url: string) => {
     if (identity) await connect(url, identity);
@@ -527,9 +547,24 @@ export default function App() {
             <div className="community-section-label">
               YOUR COMMUNITY<span>{boot?.members.length ?? 0}</span>
             </div>
-            <button className="sidebar-item overview-link" onClick={() => setDialog('about')}>
-              <BookOpen size={18} />
-              <span>Community guide</span>
+            <button
+              className={`sidebar-item overview-link ${canvasOpen ? 'canvas-selected' : ''}`}
+              onClick={openCanvas}
+            >
+              <LayoutGrid size={18} />
+              <span>Community canvas</span>
+              <span className="new-badge">new</span>
+            </button>
+            <button
+              className={`sidebar-item overview-link ${workspaceOpen ? 'canvas-selected' : ''}`}
+              onClick={() => {
+                setWorkspaceOpen(true);
+                setCanvasOpen(false);
+                setSidebarOpen(false);
+              }}
+            >
+              <Sparkles size={18} />
+              <span>Community home</span>
               <span className="new-badge">new</span>
             </button>
             <div className="channel-category">
@@ -555,7 +590,7 @@ export default function App() {
               .map((item) => (
                 <button
                   key={item.id}
-                  className={`sidebar-item channel-item ${active === item.id || (!boot && item.id === 'default-0') ? 'active' : ''}`}
+                  className={`sidebar-item channel-item ${!canvasOpen && !workspaceOpen && (active === item.id || (!boot && item.id === 'default-0')) ? 'active' : ''}`}
                   onClick={() => selectChannel(item)}
                 >
                   <Hash size={19} />
@@ -582,7 +617,7 @@ export default function App() {
               .map((item) => (
                 <button
                   key={item.id}
-                  className={`sidebar-item channel-item ${active === item.id ? 'active' : ''} ${voice.channel?.id === item.id ? 'in-voice' : ''}`}
+                  className={`sidebar-item channel-item ${!canvasOpen && !workspaceOpen && active === item.id ? 'active' : ''} ${voice.channel?.id === item.id ? 'in-voice' : ''}`}
                   onClick={() => selectChannel(item)}
                 >
                   <Volume2 size={18} />
@@ -606,7 +641,7 @@ export default function App() {
           </div>
           {voice.channel && (
             <div className="voice-status">
-              <button onClick={() => setActive(voice.channel!.id)}>
+              <button onClick={() => selectChannel(voice.channel!)}>
                 <Activity size={16} />
                 <span>
                   <b>Voice connected</b>
@@ -673,18 +708,42 @@ export default function App() {
               <Menu size={20} />
             </button>
             <span className="header-channel-icon">
-              {channel?.kind === 'voice' ? <Volume2 size={23} /> : <Hash size={24} />}
+              {workspaceOpen || canvasOpen ? (
+                <LayoutGrid size={22} />
+              ) : channel?.kind === 'voice' ? (
+                <Volume2 size={23} />
+              ) : (
+                <Hash size={24} />
+              )}
             </span>
-            <b>{channel?.name ?? 'general'}</b>
+            <b>
+              {workspaceOpen
+                ? 'Community home'
+                : canvasOpen
+                  ? 'Community canvas'
+                  : (channel?.name ?? 'general')}
+            </b>
             <span className="header-divider" />
             <span className="channel-topic">
-              {channel?.topic ?? 'A little bit of everything. Make yourself at home.'}
+              {workspaceOpen
+                ? 'Your people, your plans, your place.'
+                : canvasOpen
+                  ? 'Your community, from a different perspective.'
+                  : (channel?.topic ?? 'A little bit of everything. Make yourself at home.')}
             </span>
             <div className="header-actions">
               <span className="node-badge">
                 <span className="tiny-dot" />
                 self-hosted
               </span>
+              <button
+                className={`icon-btn ${canvasOpen ? 'selected-icon' : ''}`}
+                aria-label="Open community canvas"
+                title="Community canvas"
+                onClick={openCanvas}
+              >
+                <LayoutGrid size={18} />
+              </button>
               <button
                 className="icon-btn"
                 aria-label="Search messages"
@@ -727,54 +786,90 @@ export default function App() {
           )}
           <div className="main-content">
             <section className="conversation" aria-label="Conversation">
-              {boot && channel ? (
-                channel.kind === 'text' ? (
-                  <>
-                    <ChatHistory
+              <div className="channel-view" hidden={canvasOpen || workspaceOpen}>
+                {boot && channel ? (
+                  channel.kind === 'text' ? (
+                    <Chat
+                      className="raeen-chat-frame"
+                      messages={currentMessages.map((m) => ({
+                        id: m.id,
+                        role: 'user',
+                        content: m.content,
+                        author: m.author.name,
+                      }))}
+                      onSendMessage={(content) => void sendMessage(content)}
+                    >
+                      <ChatHistory
+                        channel={channel}
+                        messages={currentMessages}
+                        me={boot.user}
+                        compact={preferences.compact}
+                        hasMore={hasMore[active] ?? false}
+                        loading={loading[active] ?? false}
+                        loadMore={() => loadHistory(active, currentMessages[0]?.seq, true)}
+                        onReply={setReply}
+                        onEdit={onEdit}
+                        onDelete={onDelete}
+                        onReact={onReact}
+                      />
+                      <Composer
+                        channel={channel}
+                        send={sendMessage}
+                        reply={reply}
+                        clearReply={() => setReply(null)}
+                        onTyping={() => {
+                          if (socketRef.current?.readyState === WebSocket.OPEN)
+                            socketRef.current.send(JSON.stringify({ type: 'typing', channel_id: active }));
+                        }}
+                        disabled={connection !== 'online'}
+                        typing={Object.values(typers)
+                          .filter((typer) => typer.channel === active)
+                          .map((typer) => typer.name)}
+                      />
+                    </Chat>
+                  ) : (
+                    <VoiceView
                       channel={channel}
-                      messages={currentMessages}
-                      me={boot.user}
-                      compact={preferences.compact}
-                      hasMore={hasMore[active] ?? false}
-                      loading={loading[active] ?? false}
-                      loadMore={() => loadHistory(active, currentMessages[0]?.seq, true)}
-                      onReply={setReply}
-                      onEdit={onEdit}
-                      onDelete={onDelete}
-                      onReact={onReact}
+                      voice={voice}
+                      enabled={boot.node.voice_enabled}
+                      openSettings={() => setDialog('settings')}
                     />
-                    <Composer
-                      channel={channel}
-                      send={sendMessage}
-                      reply={reply}
-                      clearReply={() => setReply(null)}
-                      onTyping={() => {
-                        if (socketRef.current?.readyState === WebSocket.OPEN)
-                          socketRef.current.send(JSON.stringify({ type: 'typing', channel_id: active }));
-                      }}
-                      disabled={connection !== 'online'}
-                      typing={Object.values(typers)
-                        .filter((typer) => typer.channel === active)
-                        .map((typer) => typer.name)}
-                    />
-                  </>
+                  )
                 ) : (
-                  <VoiceView
-                    channel={channel}
-                    voice={voice}
-                    enabled={boot.node.voice_enabled}
-                    openSettings={() => setDialog('settings')}
+                  <div className="app-placeholder">
+                    <Logo />
+                    <h1>Your people, your place.</h1>
+                    <p>A quieter corner of the internet.</p>
+                  </div>
+                )}
+              </div>
+              {workspaceOpen && boot && (
+                <Suspense fallback={<div className="canvas-loading">Opening community home…</div>}>
+                  <CommunityWorkspace
+                    boot={boot}
+                    histories={histories}
+                    nodeUrl={client?.base ?? nodeUrl}
+                    connection={connection}
+                    onChannel={selectChannel}
+                    onInvite={() => setDialog('invite')}
+                    onSettings={() => setDialog('settings')}
+                    onReturn={() => setWorkspaceOpen(false)}
+                    notify={notify}
                   />
-                )
-              ) : (
-                <div className="app-placeholder">
-                  <Logo />
-                  <h1>Your people, your place.</h1>
-                  <p>A quieter corner of the internet.</p>
-                </div>
+                </Suspense>
+              )}
+              {canvasOpen && boot && (
+                <Suspense fallback={<div className="canvas-loading">Opening your community…</div>}>
+                  <CommunityCanvas
+                    channels={boot.channels}
+                    name={boot.node.name}
+                    onOpen={selectChannel}
+                    onReturn={() => setCanvasOpen(false)}
+                  />
+                </Suspense>
               )}
             </section>
-            {preferences.members && boot && (
+            {preferences.members && boot && !canvasOpen && !workspaceOpen && (
               <aside className="members-sidebar" aria-label="Members">
                 <div className="members-heading">
                   <span>THE PEOPLE HERE</span>
@@ -902,6 +997,8 @@ export default function App() {
           created={async (next) => {
             await refresh();
             setActive(next.id);
+            setCanvasOpen(false);
+            setWorkspaceOpen(false);
             closeDialog();
           }}
         />
@@ -913,6 +1010,8 @@ export default function App() {
           close={closeDialog}
           open={async (message) => {
             setActive(message.channel_id);
+            setCanvasOpen(false);
+            setWorkspaceOpen(false);
             closeDialog();
             await loadHistory(message.channel_id, message.seq + 1);
           }}
@@ -1013,6 +1112,7 @@ function Welcome({
     [file, setFile] = useState<File | null>(null),
     [localError, setLocalError] = useState(''),
     [busy, setBusy] = useState(false);
+  const IdentityForm = importing || identity ? Login : SignUp;
   return (
     <div className="welcome-overlay" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
       <div className="onboarding-layout">
@@ -1033,93 +1133,95 @@ function Welcome({
             <br />
             Built around your community. Owned by you.
           </p>
-          <form
-            onSubmit={async (event) => {
-              event.preventDefault();
-              setLocalError('');
-              setBusy(true);
-              try {
-                let key: Identity;
-                if (importing) {
-                  if (!file) throw new Error('Choose your encrypted identity backup.');
-                  key = await importIdentity(file, password);
-                  setName(key.name);
-                } else {
-                  key = identity ? { ...identity, name: name.trim() } : await createIdentity(name.trim());
-                  await saveIdentity(key);
+          <IdentityForm>
+            <form
+              onSubmit={async (event) => {
+                event.preventDefault();
+                setLocalError('');
+                setBusy(true);
+                try {
+                  let key: Identity;
+                  if (importing) {
+                    if (!file) throw new Error('Choose your encrypted identity backup.');
+                    key = await importIdentity(file, password);
+                    setName(key.name);
+                  } else {
+                    key = identity ? { ...identity, name: name.trim() } : await createIdentity(name.trim());
+                    await saveIdentity(key);
+                  }
+                  setIdentity(key);
+                  await connect(url, key);
+                } catch (error) {
+                  setLocalError(errorMessage(error));
+                } finally {
+                  setBusy(false);
                 }
-                setIdentity(key);
-                await connect(url, key);
-              } catch (error) {
-                setLocalError(errorMessage(error));
-              } finally {
-                setBusy(false);
-              }
-            }}
-          >
-            {importing ? (
-              <>
+              }}
+            >
+              {importing ? (
+                <>
+                  <label>
+                    Identity backup
+                    <input
+                      type="file"
+                      accept=".json"
+                      onChange={(event) => setFile(event.target.files?.[0] ?? null)}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Backup passphrase
+                    <input
+                      type="password"
+                      autoComplete="off"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      required
+                    />
+                  </label>
+                </>
+              ) : (
                 <label>
-                  Identity backup
+                  What should we call you?
                   <input
-                    type="file"
-                    accept=".json"
-                    onChange={(event) => setFile(event.target.files?.[0] ?? null)}
+                    placeholder="Your display name"
+                    autoComplete="nickname"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                    minLength={2}
+                    maxLength={32}
                     required
                   />
                 </label>
-                <label>
-                  Backup passphrase
-                  <input
-                    type="password"
-                    autoComplete="off"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    required
-                  />
-                </label>
-              </>
-            ) : (
+              )}
               <label>
-                What should we call you?
-                <input
-                  placeholder="Your display name"
-                  autoComplete="nickname"
-                  value={name}
-                  onChange={(event) => setName(event.target.value)}
-                  minLength={2}
-                  maxLength={32}
-                  required
-                />
+                Community node
+                <span className="input-with-icon">
+                  <Globe2 size={16} />
+                  <input
+                    aria-label="Community node"
+                    type="url"
+                    value={url}
+                    onChange={(event) => setUrl(event.target.value)}
+                    required
+                  />
+                </span>
               </label>
-            )}
-            <label>
-              Community node
-              <span className="input-with-icon">
-                <Globe2 size={16} />
-                <input
-                  aria-label="Community node"
-                  type="url"
-                  value={url}
-                  onChange={(event) => setUrl(event.target.value)}
-                  required
-                />
-              </span>
-            </label>
-            {(localError || error) && (
-              <div className="form-error" role="alert">
-                {localError || error}
-              </div>
-            )}
-            <button className="primary-btn full-width" disabled={connecting || busy}>
-              {connecting || busy
-                ? 'Connecting to your community…'
-                : identity && !importing
-                  ? 'Welcome back'
-                  : 'Make yourself at home'}
-              <ArrowRight size={17} />
-            </button>
-          </form>
+              {(localError || error) && (
+                <div className="form-error" role="alert">
+                  {localError || error}
+                </div>
+              )}
+              <button className="primary-btn full-width" disabled={connecting || busy}>
+                {connecting || busy
+                  ? 'Connecting to your community…'
+                  : identity && !importing
+                    ? 'Welcome back'
+                    : 'Make yourself at home'}
+                <ArrowRight size={17} />
+              </button>
+            </form>
+          </IdentityForm>
           <button
             className="import-link"
             onClick={() => {

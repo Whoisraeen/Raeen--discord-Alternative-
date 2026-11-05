@@ -34,6 +34,7 @@ These are different browser origins: import your encrypted identity backup if yo
 - SQLite FTS5 search across the node’s history or one channel.
 - Owner, moderator, and member roles, with server-enforced bitwise permissions and owner-managed role changes.
 - Responsive layout, three accent themes, compact mode, and a collapsible member list.
+- A Community canvas adapted from Cue's Phantom Infinite Gallery: drag/throw navigation, cursor spotlight, 3D arc cards, and typed channel previews using local artwork. Select **Community canvas** in the sidebar or the grid icon in the channel header. The gallery is loaded only when opened and stops animating at rest.
 - LiveKit integration: node-issued room-scoped tokens, microphone, mute/deafen, remote audio, and browser screen sharing when a relay is configured.
 - A Tauri v2 shell, Docker build, persistent Compose volume, and a documented draft protocol.
 
@@ -145,4 +146,8 @@ Priority next work: invite-only onboarding and moderation; a reviewed device/rec
 
 ## License
 
-AGPL-3.0-only. Third-party dependencies and bundled fonts retain their respective licenses.
+AGPL-3.0-only. Third-party dependencies and bundled fonts retain their respective licenses. The adapted Cue gallery is MIT-licensed; see [THIRD_PARTY_NOTICES.md](public/THIRD_PARTY_NOTICES.md). This notice is included in the web build, desktop app, and container image.
+
+### Community workspace
+
+Open **Community home** in the channel sidebar for the overview, member directory, private event planner, node dashboard, local hosting-budget ledger, appearance controls, and field guide with encrypted-backup checking. All 132 EasyUI catalog entries are integrated into app screens and conditional controls; see [the inventory](docs/easyui-integration.md). Screens load on demand. Planner and budget records are saved on this device, are not encrypted or synchronized, and can be exported. Budget tools do not move money. Node charts distinguish loaded history from server totals.

@@ -735,6 +735,22 @@ h3 {
   position: relative;
   min-height: 0;
 }
+.channel-view {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+.channel-view[hidden] {
+  display: none;
+}
+.canvas-loading {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  color: var(--soft);
+  font-size: 12px;
+}
 .history-wrap {
   position: relative;
   flex: 1;
@@ -3095,4 +3111,36 @@ select {
   font-weight: 200 800;
   font-display: swap;
   src: url('@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2') format('woff2');
+}
+
+.raeen-chat-frame {
+  height: 100% !important;
+  min-height: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: flex;
+  flex-direction: column;
+  background: transparent !important;
+}
+.identity-form-frame {
+  width: 100%;
+}
+.identity-form-frame {
+  padding: 18px;
+  border: 1px solid #3c5043;
+  border-radius: 16px;
+  background: linear-gradient(140deg, #b5f0c809, transparent);
+  margin-top: 24px;
+}
+.identity-form-frame form {
+  margin-top: 0;
+}
+.identity-form-caption {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
 }

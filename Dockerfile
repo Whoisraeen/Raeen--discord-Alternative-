@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
 WORKDIR /app
 COPY --from=node /build/target/release/raeen-node /usr/local/bin/raeen-node
 COPY --from=client /build/dist ./dist
+COPY LICENSE public/THIRD_PARTY_NOTICES.md ./
 RUN mkdir /app/data && chown raeen:raeen /app/data
 USER raeen
 ENV RAEEN_BIND=0.0.0.0:3001 RAEEN_DATABASE=/app/data/raeen.db
